@@ -1,0 +1,23 @@
+<!-- コメント一覧 -->
+<table>
+  <% book.book_comments.each do |comment| %>
+    <tr>
+      <td>
+        <%= attachment_image_tag comment.user, :profile_image, size: "50x50", fallback: "no-image-mini.jpg" %><br>
+        <%= comment.user.name %>
+      </td>
+      <td><%= comment.comment %></td>
+      <% if comment.user == current_user %>
+        <td><%= link_to "Destroy", book_book_comments_path(comment.id), method: :delete, class: "btn btn-danger" %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
+<!-- コメント一覧 -->
+
+<!-- コメント投稿フォーム -->
+<%= form_for [book, book_comment] do |f| %>
+    <%= f.text_area :comment, class: "form-control", size: "10x5" %>
+    <%= f.submit "送信"%>
+<% end %>
+<!-- コメント投稿フォーム -->

@@ -25,7 +25,7 @@ class User < ApplicationRecord
   validates :email, {uniqueness: true}
   validates :introduction, length: {maximum: 50}
 
-
+#フォロー機能
   def follow(other_user) #ユーザーをフォローする
     following << other_user
   end
@@ -38,4 +38,20 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
+#検索機能
+  def User.search(search_word, user_or_book, how_search)
+    if user_or_book == "1"
+      if how_search == "perfect_match"
+        @users = User.where('name LIKE ?',"#{search_word}")
+      elsif how_search == "forward_match"
+        @users = User.where('name LIKE ?', "#{search_word}%")
+      elsif how_search == "backward_match"
+        @users = User.where('name LIKE ?', "%#{search_word}")
+      elsif how_search == "partial_match"
+        @users = User.where('name LIKE ?', "%#{search_word}%")
+      else
+        @users = User.all
+      end
+    end
+  end
 end

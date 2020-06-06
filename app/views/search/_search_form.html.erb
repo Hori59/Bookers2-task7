@@ -1,0 +1,8 @@
+<div class="search-form">
+  <%= form_tag(search_search_path, method: :get) do %>
+    <%= text_field(@search_content, :search_word) %>
+    <%= select(@search_model, :search_model, [["User","model_user"], ["Book","model_book"]]) %>
+    <%= select(@search_content, :search_method, [["完全一致","perfect_match"], ["前方一致","forward_match"], ["後方一致","backward_match"], ["部分一致","partial_match"]]) %>
+    <%= submit_tag "検索" %>
+  <% end %>
+</div>

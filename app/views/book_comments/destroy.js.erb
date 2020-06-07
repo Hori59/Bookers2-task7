@@ -1,1 +1,1 @@
-$('#book_comment_<%= book.id %>').remove();
+$('#comments_area').html("<%= j(render 'commentindex', {book_comments: @book_comments}) %>");

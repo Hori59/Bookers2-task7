@@ -38,7 +38,7 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
-#検索機能
+#ユーザー検索機能
   def User.search(search_word, user_or_book, how_search)
     if user_or_book == "1"
       if how_search == "perfect_match"
@@ -53,5 +53,17 @@ class User < ApplicationRecord
         @users = User.all
       end
     end
+  end
+
+  #prefecture_codeからprefecture_nameに変換するメソッド
+  include JpPrefecture
+  jp_prefecture :prefecture_code
+
+  def prefecture_name
+    JpPrefecture::Prefecture.find(code: prefecture_code).try(:name)
+  end
+
+  def prefecture_name=(prefecture_name)
+    self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
   end
 end

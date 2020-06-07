@@ -79,3 +79,5 @@ gem 'jquery-rails'
 
 gem 'kaminari'
 gem 'pry-rails'
+
+gem 'jp_prefecture'

@@ -1,8 +1,7 @@
 <%= simple_form_for @user do |f| %>
-  <%= f.input :postcode %>
+  <%= f.input :postal_code %>
   <%= f.input :prefecture_code, collection: JpPrefecture.all, :value_method => :name, include_blank: '都道府県' %>
   <%= f.input :address_city %>
   <%= f.input :address_street %>
-  <%= f.input :address_building %>
   <%= f.button :submit %>
 <% end %>

@@ -17,23 +17,23 @@
 
   <!-- 住所入力欄 -->
   <div class="field">
-    <%= f.label :postcode %><br />
-    <%= f.email_field :postcode, autofocus: true, placeholder: 'postcode', class: "postcode", id: "address_zipcode" %>
+    <%= f.label :postal_code %><br />
+    <%= f.text_field :postal_code, autofocus: true, placeholder: '郵便番号', class: "postal_code", id: "address_zipcode" %>
   </div>
 
   <div class="field">
-    <%= f.label :prefecture_code %><br>
-    <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :code, :name, class: "address", id: "address_prefecture_name" %>
+    <%= f.label :prefecture_code %><br />
+    <%= f.collection_select :prefecture_code, JpPrefecture::Prefecture.all, :name, :name, class: "address" %>
   </div>
 
   <div class="field">
-    <%= f.label :city %><br>
-    <%= f.text_field :address_city, autofocus: true, placeholder: 'address_city', class: "address", id:"address_city" %>
+    <%= f.label :city %><br />
+    <%= f.text_field :address_city, autofocus: true, placeholder: '市区町村', class: "address", id:"address_city" %>
   </div>
 
   <div class="field">
-    <%= f.label :street %><br>
-    <%= f.text_field :address_street, autofocus: true, placeholder: 'address_street', class: "address", id: "address_street" %>
+    <%= f.label :street %><br />
+    <%= f.text_field :address_street, autofocus: true, placeholder: '丁目番地', class: "address", id: "address_street" %>
   </div>
   <!-- 住所入力欄 -->
 

@@ -20,6 +20,10 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower #フォロワー
   attachment :profile_image, destroy: false
 
+  #住所の情報を元に緯度、経度を割り出す
+  geocoded_by :address#(←住所のカラム名)
+  after_validation :geocode
+
   #バリデーションは該当するモデルに設定する。エラーにする条件を設定できる。
   validates :name, length: {in: 2..20}
   validates :email, {uniqueness: true}
@@ -66,4 +70,9 @@ class User < ApplicationRecord
  def prefecture_name=(prefecture_name)
      self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
  end
+
+ def address
+    # "%s %s"%([self.prefecture_code, address_city, address_street])
+    [prefecture_code, address_city, address_street].compact.join
+  end
 end

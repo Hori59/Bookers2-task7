@@ -80,6 +80,7 @@ gem 'jquery-rails'
 gem 'kaminari'
 gem 'pry-rails'
 
-gem 'jp_prefecture'
+gem 'jp_prefecture' #住所登録・自動入力できるようになる
 
-gem 'dotenv-rails'
+gem 'dotenv-rails' #漏洩してはいけない情報を登録できる
+gem 'geocoder' #緯度・軽度から地図を表示する

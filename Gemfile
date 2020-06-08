@@ -81,3 +81,5 @@ gem 'kaminari'
 gem 'pry-rails'
 
 gem 'jp_prefecture'
+
+gem 'dotenv-rails'

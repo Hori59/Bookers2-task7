@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
   end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :postal_code, :prefecture_code, :address_city, :address_street, :latitude, :longitude])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :email, :postal_code, :prefecture_code, :address_city, :address_street])
     devise_parameter_sanitizer.permit(:sign_in, keys: [:name])
     devise_parameter_sanitizer.permit(:account_update, keys: [:name, :introduction, :postal_code, :prefecture_code, :address_city, :address_street])
     #sign_upの際にnameのデータ操作を許。追加したカラム。

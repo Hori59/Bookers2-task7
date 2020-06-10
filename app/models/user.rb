@@ -20,9 +20,17 @@ class User < ApplicationRecord
   has_many :followers, through: :passive_relationships, source: :follower #フォロワー
   attachment :profile_image, destroy: false
 
+  def address #住所のカラムを一つにする
+    "%s %s %s"%([self.prefecture_code, self.address_city, self.address_street])
+    # [address_street, address_city, prefecture_code].compact.join(', ')
+  end
   #住所の情報を元に緯度、経度を割り出す
-  geocoded_by :address#(←住所のカラム名)
+  geocoded_by :address #(←住所のカラムを合体した物)
   after_validation :geocode
+
+  # reverse_geocoded_by :latitude, :longitude
+  # after_validation :reverse_geocode, if: Proc.new { |a| a.address_city_changed? or a.address_street_changed? }
+
 
   #バリデーションは該当するモデルに設定する。エラーにする条件を設定できる。
   validates :name, length: {in: 2..20}
@@ -61,18 +69,13 @@ class User < ApplicationRecord
 
   #prefecture_codeからprefecture_nameに変換するメソッド
   include JpPrefecture
- jp_prefecture :prefecture_code
+  jp_prefecture :prefecture_code
 
- def prefecture_name
+  def prefecture_name
      JpPrefecture::Prefecture.find(code: prefecture_code).try(:name)
- end
+  end
 
- def prefecture_name=(prefecture_name)
+  def prefecture_name=(prefecture_name)
      self.prefecture_code = JpPrefecture::Prefecture.find(name: prefecture_name).code
- end
-
- def address
-    # "%s %s"%([self.prefecture_code, address_city, address_street])
-    [prefecture_code, address_city, address_street].compact.join
   end
 end

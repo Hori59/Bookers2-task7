@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   root 'home#top'
   get 'home/about'
   get 'search' => 'search#search'
+  get '/map_request', to: 'map#map', as: 'map_request'
 end

@@ -1,5 +1,6 @@
 <h2>Your MAP</h2>
-<p><%= @user.address %></p>(住所名表示)
+(住所名表示)
+<span><%= user.address %></span>
 
 <div id="map"></div>(地図を表示)
 ・・・
@@ -14,7 +15,7 @@
 <script type="text/javascript">
     function initMap() {
 
-        var test ={lat: <%= @user.latitude %>, lng: <%= @user.longitude %>};
+        var test ={lat: <%= user.latitude %>, lng: <%= user.longitude %>};
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 15,
             center: test
@@ -22,7 +23,7 @@
         var transitLayer = new google.maps.TransitLayer();
         transitLayer.setMap(map);
 
-        var contentString = '住所：<%= @user.address %>';
+        var contentString = '住所：<%= user.address %>';
         var infowindow = new google.maps.InfoWindow({
             content: contentString
         });
@@ -40,5 +41,5 @@
 </script>
 
 <script async defer
-        src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=GOOGLE_MAP_API_KEY&callback=initMap">
+        src="https://maps.googleapis.com/maps/api/js?v=3.exp&key=<%= ENV['GOOGLE_MAP_API_IP_KEY'] %>&callback=initMap">
 </script>
